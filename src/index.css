@@ -28,3 +28,11 @@ code {
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
 }
+
+.list-title {
+  min-height: 20px;
+}
+
+i {
+  cursor: pointer;
+}
