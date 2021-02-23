@@ -16,7 +16,11 @@ function KanbanBoard({ fetchLists, lists }: KanbanBoardProps) {
 
   const listsComponents = lists?.map((list: List) => <List list={list} />);
 
-  return <div className="mt-3 p-2 scrollable">{listsComponents}</div>;
+  return (
+    <div className="mt-3 p-2 scrollable d-flex align-items-start">
+      {listsComponents}
+    </div>
+  );
 }
 
 const mapStateToProps = (state: ApplicationState) => ({

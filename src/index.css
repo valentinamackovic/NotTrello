@@ -36,3 +36,16 @@ code {
 i {
   cursor: pointer;
 }
+
+i:hover {
+  opacity: 0.5;
+}
+
+.add-item:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.add-item-teaxtarea {
+  resize: none;
+}
