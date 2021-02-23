@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
-import lists from "./kanbanBoardView/listReducer";
+import lists from "./lists/listReducer";
 
 const rootReducer = combineReducers({ lists });
 

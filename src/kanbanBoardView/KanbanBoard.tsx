@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import List from "../lists/List";
+import { fetchLists } from "../lists/listThunks";
 import { ApplicationState } from "../store";
-import List from "./List";
-import { fetchLists } from "./listThunks";
 
 interface KanbanBoardProps {
   lists: List[];
