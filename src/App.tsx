@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "./header/Header";
 
 function App() {
-  return <div>Welcome!</div>;
+  return (
+    <div className="bg-secondary min-vh-100">
+      <Header />
+    </div>
+  );
 }
 
 export default App;
