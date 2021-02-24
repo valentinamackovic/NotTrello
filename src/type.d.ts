@@ -3,9 +3,12 @@ type List = {
   name: string;
   closed: boolean;
   idBoard: string;
+  cards: Card[];
 };
 
-type ListAction = {
-  type: string;
-  lists: List[];
+type Card = {
+  id: string;
+  idList: string;
+  name: string;
+  description: string;
 };
