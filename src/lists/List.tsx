@@ -12,9 +12,9 @@ function List({ list }: ListProps) {
   ));
 
   return (
-    <div className="bg-dark rounded kanban-column-width p-2 align-self-start">
+    <div className="bg-dark rounded kanban-column p-2 align-self-start">
       <div className="list-title p-1">{list.name}</div>
-      {cardComponents}
+      <div className="column-content">{cardComponents}</div>
       <AddItem title="Add another card" />
     </div>
   );

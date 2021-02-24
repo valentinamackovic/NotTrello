@@ -22,7 +22,7 @@ function KanbanBoard({ fetchLists, lists }: KanbanBoardProps) {
   return (
     <div className="mt-3 p-2 scrollable d-flex align-items-start">
       {listsComponents}
-      <div className="bg-dark rounded kanban-column-width p-2 align-self-start">
+      <div className="bg-dark rounded kanban-column p-2 align-self-start">
         <AddItem title="Add another list" />
       </div>
     </div>
