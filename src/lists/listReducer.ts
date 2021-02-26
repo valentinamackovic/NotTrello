@@ -13,6 +13,11 @@ const listReducer = (state = initialSate, action: ListAction) => {
         ...state,
         lists: action.lists,
       };
+    case "ADD_LIST_SUCCEEDED":
+      return {
+        ...state,
+        lists: [...state.lists, action.list],
+      };
     default:
       return state;
   }
