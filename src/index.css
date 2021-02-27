@@ -13,7 +13,7 @@ code {
 }
 
 .kanban-column {
-  width: 275px;
+  min-width: 275px;
   display: inline-block;
 }
 
