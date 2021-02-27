@@ -9,3 +9,10 @@ export const addListSucceeded = (list: List) =>
     type: "ADD_LIST_SUCCEEDED",
     list,
   } as const);
+
+export const addCardSucceeded = (card: Card, idList: string) =>
+  ({
+    type: "ADD_CARD_SUCCEEDED",
+    card,
+    idList
+  } as const);

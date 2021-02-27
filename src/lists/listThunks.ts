@@ -1,5 +1,9 @@
 import API from "../api";
-import { addListSucceeded, fetchListsSucceeded } from "./listActions";
+import {
+  addCardSucceeded,
+  addListSucceeded,
+  fetchListsSucceeded,
+} from "./listActions";
 
 type DispatchType = (args: ListAction | ListEmptyAction) => ListAction;
 
@@ -21,4 +25,15 @@ export const addList = (name: string) => async (dispatch: DispatchType) => {
       idBoard: "5fe8b8b82e028f8bf92c61de",
     },
   }).then((response) => dispatch(addListSucceeded(response.data)));
+};
+
+export const addCard = (name: string, idList: string) => async (
+  dispatch: DispatchType
+) => {
+  API.post("cards", null, {
+    params: {
+      name,
+      idList,
+    },
+  }).then((response) => dispatch(addCardSucceeded(response.data, idList)));
 };
