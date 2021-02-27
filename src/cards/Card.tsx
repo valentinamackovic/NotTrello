@@ -6,13 +6,20 @@ interface CardProps {
 }
 
 function Card({ card }: CardProps) {
-  const [test, setTest] = useState(false);
+  const [showEditCradModal, setShowEditCradModal] = useState(false);
 
   return (
     <div className="bg-secondary rounded m-1 px-2 py-1 d-flex justify-content-between text-wrap">
       {card.name}
-      <i className="bi bi-pencil-fill" onClick={() => setTest(true)} />
-      <EditCard card={card} showModal={test} close={() => setTest(false)} />
+      <i
+        className="bi bi-pencil-fill"
+        onClick={() => setShowEditCradModal(true)}
+      />
+      <EditCard
+        idCard={card.id}
+        show={showEditCradModal}
+        close={() => setShowEditCradModal(false)}
+      />
     </div>
   );
 }

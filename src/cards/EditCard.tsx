@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { ApplicationState } from "../store";
+import { fetchCardById } from "./cardThunks";
 
 interface CardProps {
-  card: Card;
-  showModal: boolean;
+  card: Card | undefined;
+  idCard: string;
+  show: boolean;
   close: () => void;
+  fetchCardById: (idCard: string) => void;
 }
 
-function EditCard({ card, showModal, close }: CardProps) {
-  if (!showModal) {
+function EditCard({ card, idCard, show, close, fetchCardById }: CardProps) {
+  useEffect(() => {
+    if (show) {
+      fetchCardById(idCard);
+    }
+  }, [fetchCardById, idCard, show]);
+
+  if (!show) {
     return null;
   }
 
   return (
     <div className="edit-card-modal text-dark">
       <div className="edit-card-modal-content">
-        <div className="fs-5 fw-bold mb-3 d-flex justify-content-between align-items-center">
-          Naslov <i className="bi bi-x fs-3 me-2" onClick={close} />
+        <div className="fs-5 fw-bold mb-3 d-flex justify-content-between align-items-start">
+          {card?.name} <i className="bi bi-x fs-3 me-2" onClick={close} />
         </div>
         <div className="mb-3">
           <span className="fw-bold">Description:</span>
@@ -39,4 +50,8 @@ function EditCard({ card, showModal, close }: CardProps) {
   );
 }
 
-export default EditCard;
+const mapStateToProps = (state: ApplicationState) => ({
+  card: state.cards.card,
+});
+
+export default connect(mapStateToProps, { fetchCardById })(EditCard);
