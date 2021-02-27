@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "../cards/Card";
 import AddItem from "../addItem/AddItem";
+import Card from "../cards/Card";
 
 interface ListProps {
   list: List;

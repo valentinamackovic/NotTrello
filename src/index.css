@@ -26,12 +26,11 @@ code {
   overflow-y: auto;
 }
 
-.scrollable {
+.horizontal-scrollable {
   max-width: 100vw;
   min-height: 93vh;
   white-space: nowrap;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .list-title {
@@ -53,4 +52,25 @@ i:hover {
 
 .add-item-teaxtarea {
   resize: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #6c757d;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6c757d;
+}
+#fancy-scrollbar::-webkit-scrollbar-thumb {
+  background: #212529;
+}
+#fancy-scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #a0a5ac;
 }
