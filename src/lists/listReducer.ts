@@ -6,7 +6,7 @@ const initialSate: ListState = {
   lists: [],
 };
 
-const listReducer = (state = initialSate, action: ListAction) => {
+const listReducer = (state = initialSate, action: ListAction): ListState => {
   switch (action.type) {
     case "FETCH_LISTS_SUCCEEDED":
       return {
