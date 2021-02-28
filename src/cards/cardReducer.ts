@@ -1,9 +1,11 @@
 interface CardState {
-  card: Card | undefined;
+  card: Card | null;
+  updating: boolean;
 }
 
 const initialSate: CardState = {
-  card: undefined,
+  card: null,
+  updating: false,
 };
 
 const cardReducer = (state = initialSate, action: ListAction) => {
@@ -12,6 +14,11 @@ const cardReducer = (state = initialSate, action: ListAction) => {
       return {
         ...state,
         card: action.card,
+      };
+    case "RESET_CARD_STATE":
+      return {
+        ...state,
+        card: null,
       };
     default:
       return state;

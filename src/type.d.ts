@@ -10,5 +10,5 @@ type Card = {
   id: string;
   idList: string;
   name: string;
-  description: string;
+  desc: string;
 };
