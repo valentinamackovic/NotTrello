@@ -27,6 +27,7 @@ function AddItem({ title, handleAddItemClicked }: AddItemProps) {
         className="form-control bg-secondary border-secondary add-item-teaxtarea text-light"
         value={newItemName}
         onChange={(e) => setNewItemName(e.target.value)}
+        autoFocus
       />
       <div className="mt-1">
         <button
