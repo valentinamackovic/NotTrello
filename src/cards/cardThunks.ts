@@ -7,11 +7,13 @@ type DispatchType = (args: CardAction | CardEmptyAction) => CardAction;
 export const fetchCardById = (idCard: string) => async (
   dispatch: DispatchType
 ) => {
-  API.get<Card>("cards/" + idCard).then((response) => {
-    if (response.status === 200) {
-      dispatch(fetchCardByIdSucceeded(response.data));
+  API.get<Card>("cards/" + idCard + "?fields=id,idList,name,desc").then(
+    (response) => {
+      if (response.status === 200) {
+        dispatch(fetchCardByIdSucceeded(response.data));
+      }
     }
-  });
+  );
 };
 
 export const updateCard = (card: Card) => async (
