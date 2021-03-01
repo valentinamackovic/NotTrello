@@ -2,6 +2,7 @@ import API from "../api";
 import {
   addCardSucceeded,
   addListSucceeded,
+  archiveListSucceeded,
   fetchListsSucceeded,
 } from "./listActions";
 
@@ -36,4 +37,16 @@ export const addCard = (name: string, idList: string) => async (
       idList,
     },
   }).then((response) => dispatch(addCardSucceeded(response.data, idList)));
+};
+
+export const archiveList = (idList: string) => async (
+  dispatch: DispatchType
+) => {
+  API.put<List[]>("lists/" + idList + "/closed", null, {
+    params: { value: true },
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch(archiveListSucceeded(idList));
+    }
+  });
 };

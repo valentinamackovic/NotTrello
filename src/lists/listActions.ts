@@ -14,5 +14,11 @@ export const addCardSucceeded = (card: Card, idList: string) =>
   ({
     type: "ADD_CARD_SUCCEEDED",
     card,
-    idList
+    idList,
+  } as const);
+
+export const archiveListSucceeded = (idList: string) =>
+  ({
+    type: "ARCHIVE_CARD_SUCCEEDED",
+    idList,
   } as const);

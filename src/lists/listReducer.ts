@@ -28,6 +28,14 @@ const listReducer = (state = initialSate, action: ListAction): ListState => {
         ...state,
         lists: updatedList,
       };
+    case "ARCHIVE_CARD_SUCCEEDED":
+      const list: List[] = state.lists.filter(
+        (list) => list.id !== action.idList
+      );
+      return {
+        ...state,
+        lists: [...list],
+      };
     default:
       return state;
   }
