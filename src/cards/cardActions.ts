@@ -8,3 +8,9 @@ export const resetCardState = () =>
   ({
     type: "RESET_CARD_STATE",
   } as const);
+
+export const addCommentSucceeded = (comment: Action) =>
+  ({
+    type: "ADD_COMMENT_SUCCEEDED",
+    comment,
+  } as const);

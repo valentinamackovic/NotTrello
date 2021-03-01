@@ -78,6 +78,7 @@ i:hover {
 .edit-card-title-input {
   background: transparent;
   border: none;
+  width: 100%;
   border-radius: 0.25rem;
 }
 
@@ -86,6 +87,10 @@ i:hover {
   border-color: #86b7fe;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+}
+
+.small-text {
+  font-size: 12px;
 }
 
 ::-webkit-scrollbar {

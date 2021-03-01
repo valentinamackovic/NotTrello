@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { ApplicationState } from "../store";
 import { useOutsideClickAlert } from "../useOutsideClickAlert";
 import { resetCardState } from "./cardActions";
-import { fetchCardById, updateCard } from "./cardThunks";
+import { addComment, fetchCardById, updateCard } from "./cardThunks";
 
 interface CardProps {
   card: Card | null;
@@ -13,6 +13,7 @@ interface CardProps {
   resetCardState: () => void;
   fetchCardById: (idCard: string) => void;
   updateCard: (card: Card) => void;
+  addComment: (idCard: string, text: string) => void;
 }
 
 function EditCard({
@@ -23,12 +24,17 @@ function EditCard({
   resetCardState,
   fetchCardById,
   updateCard,
+  addComment,
 }: CardProps) {
   const modalContentRef = useRef(null);
-  useOutsideClickAlert(modalContentRef, close);
+  useOutsideClickAlert(modalContentRef, () => {
+    setIsBtnSaveCommentVisible(false);
+    close();
+  });
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [comment, setComment] = useState("");
+  const [isBtnSaveCommentVisible, setIsBtnSaveCommentVisible] = useState(false);
 
   useEffect(() => {
     if (show) {
@@ -47,10 +53,21 @@ function EditCard({
       id: card?.id || "",
       desc: description,
       idList: card?.idList || "",
+      actions: card?.actions || [],
     };
     updateCard(updatedCard);
     close();
   };
+
+  const onAddComment = () => {
+    addComment(card?.id || "", comment);
+    setComment("");
+    setIsBtnSaveCommentVisible(false);
+  };
+
+  const comments = card?.actions?.map((comment) => (
+    <Comment comment={comment} />
+  ));
 
   if (!show) {
     return null;
@@ -62,7 +79,7 @@ function EditCard({
         <div className="fs-5 fw-bold mb-3 d-flex justify-content-between align-items-start">
           <input
             type="text"
-            className="edit-card-title-input"
+            className="edit-card-title-input text-wrap"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -83,25 +100,57 @@ function EditCard({
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <div className="mb-2 d-flex justify-content-between align-items-center">
-          <span className="fw-bold">Activity</span>
-          <button className="btn btn-sm btn-info text-light">
-            Show activity
-          </button>
+        <div className="mb-2 d-flex justify-content-between align-items-center fw-bold">
+          Activity
         </div>
-        <div className="pb-5">
+        <div
+          className="pb-1"
+          onBlur={(event) => {
+            //@ts-ignore
+            if (!event.currentTarget.contains(event.relatedTarget)) {
+              setIsBtnSaveCommentVisible(false);
+            }
+          }}
+        >
           <input
             type="text"
-            className="form-control"
+            className="form-control border-bottom-0 comment-input"
             placeholder="Write a comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            onFocus={() => setIsBtnSaveCommentVisible(true)}
           />
+          {isBtnSaveCommentVisible && (
+            <button
+              className="btn btn-sm btn-info text-light mt-2 ms-2"
+              onClick={onAddComment}
+            >
+              Add
+            </button>
+          )}
         </div>
+        <div>{comments}</div>
         <button className="btn btn-info text-light mt-4" onClick={onSave}>
           Save
         </button>
       </div>
+    </div>
+  );
+}
+
+interface CommentProps {
+  comment: Action;
+}
+
+function Comment({ comment }: CommentProps) {
+  const date = new Date(comment.date);
+  return (
+    <div className="inline-flex my-2 mx-2">
+      <div className="small-text fw-bold">
+        {comment.memberCreator.fullName}
+        <span className="mx-2 fw-light">{date.toLocaleString()}</span>
+      </div>
+      <input className="edit-card-title-input mt-1" value={comment.data.text} />
     </div>
   );
 }
@@ -114,4 +163,5 @@ export default connect(mapStateToProps, {
   fetchCardById,
   resetCardState,
   updateCard,
+  addComment,
 })(EditCard);

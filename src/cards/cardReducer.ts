@@ -8,7 +8,7 @@ const initialSate: CardState = {
   updating: false,
 };
 
-const cardReducer = (state = initialSate, action: ListAction) => {
+const cardReducer = (state = initialSate, action: ListAction): CardState => {
   switch (action.type) {
     case "FETCH_CARD_BY_ID_SUCCEEDED":
       return {
@@ -19,6 +19,16 @@ const cardReducer = (state = initialSate, action: ListAction) => {
       return {
         ...state,
         card: null,
+      };
+    case "ADD_COMMENT_SUCCEEDED":
+      let updatedCard;
+      if (state.card !== null) {
+        const newActionsList = [action.comment].concat(state.card?.actions);
+        updatedCard = { ...state.card, actions: newActionsList };
+      }
+      return {
+        ...state,
+        card: updatedCard || null,
       };
     default:
       return state;
