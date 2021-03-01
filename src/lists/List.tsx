@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import AddItem from "./AddItem";
 import Card from "../cards/Card";
+import AddItem from "./AddItem";
 import { addCard, archiveList } from "./listThunks";
 
 interface ListProps {

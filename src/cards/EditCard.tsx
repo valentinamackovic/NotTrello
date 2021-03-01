@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { ApplicationState } from "../store";
+import { useOutsideClickAlert } from "../useOutsideClickAlert";
 import { resetCardState } from "./cardActions";
 import { fetchCardById, updateCard } from "./cardThunks";
 
@@ -23,6 +24,8 @@ function EditCard({
   fetchCardById,
   updateCard,
 }: CardProps) {
+  const modalContentRef = useRef(null);
+  useOutsideClickAlert(modalContentRef, close);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [comment, setComment] = useState("");
@@ -55,7 +58,7 @@ function EditCard({
 
   return (
     <div className="edit-card-modal text-dark">
-      <div className="edit-card-modal-content">
+      <div className="edit-card-modal-content" ref={modalContentRef}>
         <div className="fs-5 fw-bold mb-3 d-flex justify-content-between align-items-start">
           <input
             type="text"

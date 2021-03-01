@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useOutsideClickAlert } from "../useOutsideClickAlert";
 
 interface AddItemProps {
   title: string;
@@ -6,6 +7,8 @@ interface AddItemProps {
 }
 
 function AddItem({ title, handleAddItemClicked }: AddItemProps) {
+  const addItemFormRef = useRef(null);
+  useOutsideClickAlert(addItemFormRef, () => setIsAddingItem(false));
   const [isAddingItem, setIsAddingItem] = useState<boolean>(false);
   const [newItemName, setNewItemName] = useState<string>("");
 
@@ -18,7 +21,7 @@ function AddItem({ title, handleAddItemClicked }: AddItemProps) {
     );
   }
   return (
-    <form className="py-1 my-1 mx-1">
+    <form className="py-1 my-1 mx-1" ref={addItemFormRef}>
       <textarea
         rows={3}
         className="form-control bg-secondary border-secondary add-item-teaxtarea text-light"
