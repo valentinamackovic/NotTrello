@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { updateComment } from "./cardThunks";
+import { deleteComment, updateComment } from "./cardThunks";
 
 interface CommentProps {
   comment: Action;
   updateComment: (comment: Action) => void;
+  deleteComment: (idAction: string, idcard: string) => void;
 }
 
-function Comment({ comment, updateComment }: CommentProps) {
+function Comment({ comment, updateComment, deleteComment }: CommentProps) {
   const [isInEditState, setIsInEditState] = useState(false);
   const [text, setText] = useState("");
 
@@ -16,7 +17,7 @@ function Comment({ comment, updateComment }: CommentProps) {
   }, [comment]);
 
   const handleSaveCommentClicked = () => {
-    const action = { ...comment, data: { text } };
+    const action = { ...comment, data: { ...comment.data, text } };
     updateComment(action);
     setIsInEditState(false);
   };
@@ -56,7 +57,11 @@ function Comment({ comment, updateComment }: CommentProps) {
             Edit
           </a>
           &nbsp;-&nbsp;
-          <a href="#" className="text-dark">
+          <a
+            href="#"
+            className="text-dark"
+            onClick={() => deleteComment(comment.id, comment.data.card.id)}
+          >
             Delete
           </a>
         </div>
@@ -67,4 +72,5 @@ function Comment({ comment, updateComment }: CommentProps) {
 
 export default connect(null, {
   updateComment,
+  deleteComment,
 })(Comment);

@@ -19,9 +19,10 @@ type Action = {
   type: string;
   data: {
     text: string;
+    card: Card;
   };
   memberCreator: Member;
-  date: Date
+  date: Date;
 };
 
 type Member = {

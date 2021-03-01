@@ -55,3 +55,13 @@ export const updateComment = (action: Action) => async (
     }
   });
 };
+
+export const deleteComment = (idAction: string, idCard: string) => async (
+  dispatch: DispatchType | any
+) => {
+  API.delete<Action>("actions/" + idAction).then((response) => {
+    if (response.status === 200) {
+      dispatch(fetchCardById(idCard));
+    }
+  });
+};
