@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import AddItem from "../addItem/AddItem";
+import AddItemList from "../lists/AddItemList";
 import List from "../lists/List";
 import { addList, fetchLists } from "../lists/listThunks";
 import { ApplicationState } from "../store";
@@ -41,12 +41,9 @@ function KanbanBoard({ fetchLists, lists, addList }: KanbanBoardProps) {
       id="fancy-scrollbar"
     >
       {listsComponents}
-      <div className="bg-dark rounded kanban-column p-2 align-self-start">
-        <AddItem
-          title="Add another list"
-          handleAddItemClicked={(name) => handleAddListClicked(name)}
-        />
-      </div>
+      <AddItemList
+        handleAddListClicked={(name) => handleAddListClicked(name)}
+      />
     </div>
   );
 }
