@@ -1,6 +1,10 @@
 import API from "../api";
 import { fetchLists } from "../lists/listThunks";
-import { addCommentSucceeded, fetchCardByIdSucceeded } from "./cardActions";
+import {
+  addCommentSucceeded,
+  fetchCardByIdSucceeded,
+  updateCommentSucceeded,
+} from "./cardActions";
 
 type DispatchType = (args: CardAction | CardEmptyAction) => CardAction;
 
@@ -29,7 +33,7 @@ export const updateCard = (card: Card) => async (
 };
 
 export const addComment = (idCard: string, text: string) => async (
-  dispatch: DispatchType | any
+  dispatch: DispatchType
 ) => {
   API.post<Action>("cards/" + idCard + "/actions/comments?text=" + text).then(
     (response) => {
@@ -38,4 +42,16 @@ export const addComment = (idCard: string, text: string) => async (
       }
     }
   );
+};
+
+export const updateComment = (action: Action) => async (
+  dispatch: DispatchType
+) => {
+  API.put<Action>("actions/" + action.id, null, {
+    params: { text: action.data.text },
+  }).then((response) => {
+    if (response.status === 200) {
+      dispatch(updateCommentSucceeded(response.data));
+    }
+  });
 };

@@ -4,6 +4,7 @@ import { ApplicationState } from "../store";
 import { useOutsideClickAlert } from "../useOutsideClickAlert";
 import { resetCardState } from "./cardActions";
 import { addComment, fetchCardById, updateCard } from "./cardThunks";
+import Comment from "./Comment";
 
 interface CardProps {
   card: Card | null;
@@ -134,23 +135,6 @@ function EditCard({
           Save
         </button>
       </div>
-    </div>
-  );
-}
-
-interface CommentProps {
-  comment: Action;
-}
-
-function Comment({ comment }: CommentProps) {
-  const date = new Date(comment.date);
-  return (
-    <div className="inline-flex my-2 mx-2">
-      <div className="small-text fw-bold">
-        {comment.memberCreator.fullName}
-        <span className="mx-2 fw-light">{date.toLocaleString()}</span>
-      </div>
-      <input className="edit-card-title-input mt-1" value={comment.data.text} />
     </div>
   );
 }

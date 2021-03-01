@@ -14,3 +14,9 @@ export const addCommentSucceeded = (comment: Action) =>
     type: "ADD_COMMENT_SUCCEEDED",
     comment,
   } as const);
+
+export const updateCommentSucceeded = (comment: Action) =>
+  ({
+    type: "UPDATE_COMMENT_SUCCEEDED",
+    comment,
+  } as const);

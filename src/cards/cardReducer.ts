@@ -30,6 +30,18 @@ const cardReducer = (state = initialSate, action: ListAction): CardState => {
         ...state,
         card: updatedCard || null,
       };
+    case "UPDATE_COMMENT_SUCCEEDED":
+      let updatedComment;
+      if (state.card !== null) {
+        updatedComment = {
+          ...state.card,
+          actions: [...(state.card?.actions || []), action.comment],
+        };
+      }
+      return {
+        ...state,
+        card: updatedComment || null,
+      };
     default:
       return state;
   }
