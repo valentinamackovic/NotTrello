@@ -39,17 +39,6 @@ export const updateListName = (idList: string, name: string) => async (
   }).then((response) => dispatch(updateListSucceeded(response.data)));
 };
 
-export const addCard = (name: string, idList: string) => async (
-  dispatch: DispatchType
-) => {
-  API.post("cards", null, {
-    params: {
-      name,
-      idList,
-    },
-  }).then((response) => dispatch(addCardSucceeded(response.data, idList)));
-};
-
 export const archiveList = (idList: string) => async (
   dispatch: DispatchType
 ) => {
@@ -60,4 +49,15 @@ export const archiveList = (idList: string) => async (
       dispatch(archiveListSucceeded(idList));
     }
   });
+};
+
+export const addCard = (name: string, idList: string) => async (
+  dispatch: DispatchType
+) => {
+  API.post("cards", null, {
+    params: {
+      name,
+      idList,
+    },
+  }).then((response) => dispatch(addCardSucceeded(response.data, idList)));
 };

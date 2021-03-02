@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 import { ApplicationState } from "../store";
 import { useOutsideClickAlert } from "../useOutsideClickAlert";
 import { resetCardState } from "./cardActions";
-import { addComment, fetchCardById, updateCard } from "./cardThunks";
+import {
+  addComment,
+  archiveCard,
+  fetchCardById,
+  updateCard,
+} from "./cardThunks";
 import Comment from "./Comment";
 
 interface CardProps {
@@ -15,6 +20,7 @@ interface CardProps {
   fetchCardById: (idCard: string) => void;
   updateCard: (card: Card) => void;
   addComment: (idCard: string, text: string) => void;
+  archiveCard: (idCard: string) => void;
 }
 
 function EditCard({
@@ -26,6 +32,7 @@ function EditCard({
   fetchCardById,
   updateCard,
   addComment,
+  archiveCard,
 }: CardProps) {
   const modalContentRef = useRef(null);
   useOutsideClickAlert(modalContentRef, () => {
@@ -76,7 +83,7 @@ function EditCard({
 
   return (
     <div className="edit-card-modal text-dark">
-      <div className="edit-card-modal-content" ref={modalContentRef}>
+      <div className="edit-card-modal-content row" ref={modalContentRef}>
         <div className="fs-5 fw-bold mb-3 d-flex justify-content-between align-items-start">
           <input
             type="text"
@@ -92,48 +99,59 @@ function EditCard({
             }}
           />
         </div>
-        <div className="mb-3">
-          <span className="fw-bold">Description:</span>
-          <textarea
-            className="form-control mt-2"
-            rows={4}
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
+        <div className="col-10">
+          <div className="mb-3">
+            <span className="fw-bold">Description:</span>
+            <textarea
+              className="form-control mt-2"
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div className="mb-2 d-flex justify-content-between align-items-center fw-bold">
+            Activity
+          </div>
+          <div
+            className="pb-1"
+            onBlur={(event) => {
+              //@ts-ignore
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setIsBtnSaveCommentVisible(false);
+              }
+            }}
+          >
+            <input
+              type="text"
+              className="form-control border-bottom-0 comment-input"
+              placeholder="Write a comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              onFocus={() => setIsBtnSaveCommentVisible(true)}
+            />
+            {isBtnSaveCommentVisible && (
+              <button
+                className="btn btn-sm btn-info text-light mt-2 ms-2"
+                onClick={onAddComment}
+              >
+                Add
+              </button>
+            )}
+          </div>
+          <div>{comments}</div>
+          <button className="btn btn-info text-light mt-4" onClick={onSave}>
+            Save
+          </button>
         </div>
-        <div className="mb-2 d-flex justify-content-between align-items-center fw-bold">
-          Activity
+        <div className="col-2">
+          <p className="fw-bold">ACTIONS</p>
+          <div
+            className="btn btn-info py-1 text-light"
+            onClick={() => archiveCard(card?.id || "")}
+          >
+            Archive
+          </div>
         </div>
-        <div
-          className="pb-1"
-          onBlur={(event) => {
-            //@ts-ignore
-            if (!event.currentTarget.contains(event.relatedTarget)) {
-              setIsBtnSaveCommentVisible(false);
-            }
-          }}
-        >
-          <input
-            type="text"
-            className="form-control border-bottom-0 comment-input"
-            placeholder="Write a comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            onFocus={() => setIsBtnSaveCommentVisible(true)}
-          />
-          {isBtnSaveCommentVisible && (
-            <button
-              className="btn btn-sm btn-info text-light mt-2 ms-2"
-              onClick={onAddComment}
-            >
-              Add
-            </button>
-          )}
-        </div>
-        <div>{comments}</div>
-        <button className="btn btn-info text-light mt-4" onClick={onSave}>
-          Save
-        </button>
       </div>
     </div>
   );
@@ -148,4 +166,5 @@ export default connect(mapStateToProps, {
   resetCardState,
   updateCard,
   addComment,
+  archiveCard,
 })(EditCard);

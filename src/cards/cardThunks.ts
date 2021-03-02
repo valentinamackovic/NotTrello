@@ -65,3 +65,13 @@ export const deleteComment = (idAction: string, idCard: string) => async (
     }
   });
 };
+
+export const archiveCard = (idCard: string) => async (
+  dispatch: DispatchType | any
+) => {
+  API.delete("cards/" + idCard).then((response) => {
+    if (response.status === 200) {
+      dispatch(fetchLists());
+    }
+  });
+};
