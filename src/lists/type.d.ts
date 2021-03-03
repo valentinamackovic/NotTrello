@@ -5,6 +5,7 @@ type ListAction = {
   idList: string;
   card: Card;
   comment: Action;
+  idCard: string;
 };
 
 type ListEmptyAction = {

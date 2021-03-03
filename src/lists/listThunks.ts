@@ -9,14 +9,16 @@ import {
 
 type DispatchType = (args: ListAction | ListEmptyAction) => ListAction;
 
-export const fetchLists = () => async (dispatch: DispatchType) => {
-  API.get<List[]>(
-    "boards/5fe8b8b82e028f8bf92c61de/lists?fields=name,id&cards=all"
-  ).then((response) => {
-    if (response.status === 200) {
-      dispatch(fetchListsSucceeded(response.data));
+export const fetchLists = (idBoard: string) => async (
+  dispatch: DispatchType
+) => {
+  API.get<List[]>("boards/" + idBoard + "/lists?fields=name,id&cards=all").then(
+    (response) => {
+      if (response.status === 200) {
+        dispatch(fetchListsSucceeded(response.data));
+      }
     }
-  });
+  );
 };
 
 export const addList = (name: string) => async (dispatch: DispatchType) => {

@@ -44,6 +44,31 @@ const listReducer = (state = initialSate, action: ListAction): ListState => {
         ...state,
         lists: [...list],
       };
+    case "ARCHIVE_CARD_SUCCEEDED":
+      const listWithoutCard: List[] = state.lists.map((list) => {
+        return {
+          ...list,
+          cards: list.cards.filter((card) => card.id !== action.idCard),
+        };
+      });
+      return {
+        ...state,
+        lists: listWithoutCard,
+      };
+    case "UPDATE_CARD_SUCCEEDED":
+      const updatedCardList = state.lists.map((list) => {
+        if (list.id === action.card.idList) {
+          const cardsWithoutUpdatedOne = list.cards.filter(
+            (card) => card.id !== action.card.id
+          );
+          return { ...list, cards: [...cardsWithoutUpdatedOne, action.card] };
+        }
+        return list;
+      });
+      return {
+        ...state,
+        lists: updatedCardList,
+      };
     default:
       return state;
   }

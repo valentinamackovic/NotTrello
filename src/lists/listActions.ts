@@ -28,3 +28,15 @@ export const archiveListSucceeded = (idList: string) =>
     type: "ARCHIVE_LIST_SUCCEEDED",
     idList,
   } as const);
+
+export const updateCardSucceeded = (card: Card) =>
+  ({
+    type: "UPDATE_CARD_SUCCEEDED",
+    card,
+  } as const);
+
+export const archiveCardSucceeded = (idCard: string) =>
+  ({
+    type: "ARCHIVE_CARD_SUCCEEDED",
+    idCard,
+  } as const);

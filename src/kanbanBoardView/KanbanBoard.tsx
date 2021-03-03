@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import AddItemList from "../lists/AddItemList";
 import List from "../lists/List";
 import { addList, fetchLists } from "../lists/listThunks";
@@ -7,21 +8,24 @@ import { ApplicationState } from "../store";
 
 interface KanbanBoardProps {
   lists: List[];
-  fetchLists: () => void;
+  fetchLists: (idBoard: string) => void;
   addList: (name: string) => Promise<void>;
 }
 
 function KanbanBoard({ fetchLists, lists, addList }: KanbanBoardProps) {
-  useEffect(() => {
-    window.addEventListener("focus", () => fetchLists());
+  // useEffect(() => {
+  //   window.addEventListener("focus", () => fetchLists());
 
-    return function cleanup() {
-      window.removeEventListener("focus", () => fetchLists());
-    };
-  }, [fetchLists]);
+  //   return function cleanup() {
+  //     window.removeEventListener("focus", () => fetchLists());
+  //   };
+  // }, [fetchLists]);
+  //@ts-ignore
+  const { id } = useParams();
+  console.log(id);
 
   useEffect(() => {
-    fetchLists();
+    fetchLists(id);
   }, [fetchLists]);
 
   const handleAddListClicked = (name: string) => {

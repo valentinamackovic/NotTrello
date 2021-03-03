@@ -1,5 +1,8 @@
 import API from "../api";
-import { fetchLists } from "../lists/listThunks";
+import {
+  archiveCardSucceeded,
+  updateCardSucceeded,
+} from "../lists/listActions";
 import {
   addCommentSucceeded,
   fetchCardByIdSucceeded,
@@ -27,7 +30,7 @@ export const updateCard = (card: Card) => async (
     headers: { "Content-Type": "application/json" },
   }).then((response) => {
     if (response.status === 200) {
-      dispatch(fetchLists());
+      dispatch(updateCardSucceeded(response.data));
     }
   });
 };
@@ -67,11 +70,11 @@ export const deleteComment = (idAction: string, idCard: string) => async (
 };
 
 export const archiveCard = (idCard: string) => async (
-  dispatch: DispatchType | any
+  dispatch: DispatchType
 ) => {
   API.delete("cards/" + idCard).then((response) => {
     if (response.status === 200) {
-      dispatch(fetchLists());
+      dispatch(archiveCardSucceeded(idCard));
     }
   });
 };

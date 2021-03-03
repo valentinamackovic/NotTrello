@@ -1,3 +1,12 @@
+type Board = {
+  id: string;
+  name: string;
+  prefs: {
+    backgroundImage?: string;
+    backgroundColor?: string;
+  };
+};
+
 type List = {
   id: string;
   name: string;
