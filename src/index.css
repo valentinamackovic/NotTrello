@@ -134,6 +134,10 @@ i:hover {
   border: none;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .add-board-input:focus {
   background-color: transparent;
   border: none;

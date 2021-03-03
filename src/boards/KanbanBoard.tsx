@@ -13,20 +13,11 @@ interface KanbanBoardProps {
 }
 
 function KanbanBoard({ fetchLists, lists, addList }: KanbanBoardProps) {
-  // useEffect(() => {
-  //   window.addEventListener("focus", () => fetchLists());
-
-  //   return function cleanup() {
-  //     window.removeEventListener("focus", () => fetchLists());
-  //   };
-  // }, [fetchLists]);
-  //@ts-ignore
-  const { id } = useParams();
-  console.log(id);
+  const { id } = useParams<RouterParamTypes>();
 
   useEffect(() => {
     fetchLists(id);
-  }, [fetchLists]);
+  }, [fetchLists, id]);
 
   const handleAddListClicked = (name: string) => {
     if (name === "") {

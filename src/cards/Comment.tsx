@@ -49,21 +49,19 @@ function Comment({ comment, updateComment, deleteComment }: CommentProps) {
         </div>
       ) : (
         <div className="small-text mt-1">
-          <a
-            href="#"
-            className="text-dark"
+          <span
+            className="text-dark clickable"
             onClick={() => setIsInEditState(true)}
           >
             Edit
-          </a>
+          </span>
           &nbsp;-&nbsp;
-          <a
-            href="#"
-            className="text-dark"
+          <span
+            className="text-dark clickable"
             onClick={() => deleteComment(comment.id, comment.data.card.id)}
           >
             Delete
-          </a>
+          </span>
         </div>
       )}
     </div>
