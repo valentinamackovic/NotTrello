@@ -32,7 +32,7 @@ function KanbanBoard({ fetchLists, lists, addList }: KanbanBoardProps) {
 
   return (
     <div
-      className="mt-3 p-2 horizontal-scrollable d-flex align-items-start"
+      className="p-2 horizontal-scrollable d-flex align-items-start bg-secondary"
       id="fancy-scrollbar"
     >
       {listsComponents}
