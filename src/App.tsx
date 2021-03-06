@@ -10,8 +10,8 @@ function App() {
   return (
     <Provider store={store}>
       <div className="min-vh-100 text-light">
-        <Header />
         <Router>
+          <Header />
           <Switch>
             <Route exact path="/b/:id/:name">
               <KanbanBoardView />

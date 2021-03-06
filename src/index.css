@@ -17,6 +17,24 @@ hr {
   margin: 10px;
 }
 
+i {
+  cursor: pointer;
+}
+
+i:hover {
+  opacity: 0.5;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #0dcaf0;
+}
+
+.header-link:hover {
+  opacity: 0.5;
+  color: #0dcaf0 !important;
+}
+
 .kanban-column {
   min-width: 275px;
   max-width: 275px;
@@ -35,21 +53,13 @@ hr {
 
 .horizontal-scrollable {
   max-width: 100vw;
-  min-height: calc(100vh - 52px);
+  min-height: calc(100vh - 51px);
   white-space: nowrap;
   overflow-x: auto;
 }
 
 .list-title {
   min-height: 20px;
-}
-
-i {
-  cursor: pointer;
-}
-
-i:hover {
-  opacity: 0.5;
 }
 
 .add-item:hover {
