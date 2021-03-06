@@ -46,7 +46,7 @@ function List({
   ));
 
   return (
-    <div className="p-2">
+    <div className="mx-1">
       <ConfirmationModal
         close={() => setShowConfirmationMdoal(false)}
         show={showConfirmationMdoal}

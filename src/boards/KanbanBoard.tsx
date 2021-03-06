@@ -56,7 +56,7 @@ function KanbanBoard({
           droppableId="board"
           type="COLUMN"
           direction="horizontal"
-          ignoreContainerClipping={false}
+          ignoreContainerClipping={true}
           isCombineEnabled={false}
         >
           {(provided: DroppableProvided) => (
@@ -67,16 +67,15 @@ function KanbanBoard({
                 className="d-flex align-items-start bg-secondary"
               >
                 {listsComponents}
+                <AddItemList
+                  handleAddListClicked={(name) => handleAddListClicked(name)}
+                  index={lists.length}
+                />
+                {provided.placeholder}
               </div>
-              {provided.placeholder}
             </div>
           )}
         </Droppable>
-        <div className="ms-2 mt-2">
-          <AddItemList
-            handleAddListClicked={(name) => handleAddListClicked(name)}
-          />
-        </div>
       </div>
     </DragDropContext>
   );
