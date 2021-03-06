@@ -6,6 +6,8 @@ type ListAction = {
   card: Card;
   comment: Action;
   idCard: string;
+  movedFromList: List;
+  movedToList: List;
 };
 
 type ListEmptyAction = {

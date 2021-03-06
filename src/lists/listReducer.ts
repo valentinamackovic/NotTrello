@@ -13,6 +13,12 @@ const listReducer = (state = initialSate, action: ListAction): ListState => {
         ...state,
         lists: action.lists,
       };
+    case "REORDER_LISTS_SUCCEEDED":
+      console.log("izvrsi se");
+      return {
+        ...state,
+        lists: action.lists,
+      };
     case "ADD_LIST_SUCCEEDED":
       return {
         ...state,
@@ -56,6 +62,7 @@ const listReducer = (state = initialSate, action: ListAction): ListState => {
         lists: listWithoutCard,
       };
     case "UPDATE_CARD_SUCCEEDED":
+      console.log("updated", action.card);
       const updatedCardList = state.lists.map((list) => {
         if (list.id === action.card.idList) {
           const cardsWithoutUpdatedOne = list.cards.filter(

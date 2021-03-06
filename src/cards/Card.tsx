@@ -1,26 +1,37 @@
 import React, { useState } from "react";
+import { Draggable, DraggableProvided } from "react-beautiful-dnd";
 import EditCard from "./EditCard";
 
 interface CardProps {
   card: Card;
+  index: number;
 }
 
-function Card({ card }: CardProps) {
+function Card({ card, index }: CardProps) {
   const [showEditCradModal, setShowEditCradModal] = useState(false);
 
   return (
-    <div className="bg-secondary rounded m-1 px-2 py-1 d-flex justify-content-between text-wrap">
-      {card.name}
-      <i
-        className="bi bi-pencil-fill"
-        onClick={() => setShowEditCradModal(true)}
-      />
-      <EditCard
-        idCard={card.id}
-        show={showEditCradModal}
-        close={() => setShowEditCradModal(false)}
-      />
-    </div>
+    <Draggable draggableId={card.id} index={index}>
+      {(provided: DraggableProvided) => (
+        <div
+          className="bg-secondary rounded m-1 px-2 py-1 d-flex justify-content-between text-wrap"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          {card.name}
+          <i
+            className="bi bi-pencil-fill"
+            onClick={() => setShowEditCradModal(true)}
+          />
+          <EditCard
+            idCard={card.id}
+            show={showEditCradModal}
+            close={() => setShowEditCradModal(false)}
+          />
+        </div>
+      )}
+    </Draggable>
   );
 }
 

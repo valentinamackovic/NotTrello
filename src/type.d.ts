@@ -13,6 +13,7 @@ type List = {
   closed: boolean;
   idBoard: string;
   cards: Card[];
+  pos: number;
 };
 
 type Card = {

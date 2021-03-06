@@ -40,3 +40,15 @@ export const archiveCardSucceeded = (idCard: string) =>
     type: "ARCHIVE_CARD_SUCCEEDED",
     idCard,
   } as const);
+
+export const reorderListsSucceeded = (lists: List[]) =>
+  ({
+    type: "REORDER_LISTS_SUCCEEDED",
+    lists,
+  } as const);
+
+export const reorderCardsSucceeded = (lists: List[]) =>
+  ({
+    type: "REORDER_CARDS_SUCCEEDED",
+    lists,
+  } as const);
