@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import ConfirmationModal from "../shared/ConfirmationModal";
 import { deleteComment, updateComment } from "./cardThunks";
 
 interface CommentProps {
@@ -11,6 +12,7 @@ interface CommentProps {
 function Comment({ comment, updateComment, deleteComment }: CommentProps) {
   const [isInEditState, setIsInEditState] = useState(false);
   const [text, setText] = useState("");
+  const [showConfirmationMdoal, setShowConfirmationMdoal] = useState(false);
 
   useEffect(() => {
     setText(comment.data.text);
@@ -25,6 +27,11 @@ function Comment({ comment, updateComment, deleteComment }: CommentProps) {
   const date = new Date(comment.date);
   return (
     <div className="inline-flex my-2 mx-2">
+      <ConfirmationModal
+        close={() => setShowConfirmationMdoal(false)}
+        show={showConfirmationMdoal}
+        onConfirm={() => deleteComment(comment.id, comment.data.card.id)}
+      />
       <div className="small-text fw-bold">
         {comment.memberCreator.fullName}
         <span className="mx-2 fw-light">{date.toLocaleString()}</span>
@@ -58,7 +65,7 @@ function Comment({ comment, updateComment, deleteComment }: CommentProps) {
           &nbsp;-&nbsp;
           <span
             className="text-dark clickable"
-            onClick={() => deleteComment(comment.id, comment.data.card.id)}
+            onClick={() => setShowConfirmationMdoal(true)}
           >
             Delete
           </span>

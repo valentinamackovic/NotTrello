@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { useOutsideClickAlert } from "../useOutsideClickAlert";
+import { useOutsideClickAlert } from "../shared/useOutsideClickAlert";
 
 interface AddItemProps {
   title: string;

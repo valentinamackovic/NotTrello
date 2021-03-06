@@ -72,7 +72,7 @@ function KanbanBoard({
             </div>
           )}
         </Droppable>
-        <div className="ms-2">
+        <div className="ms-2 mt-2">
           <AddItemList
             handleAddListClicked={(name) => handleAddListClicked(name)}
           />

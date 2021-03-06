@@ -21,7 +21,7 @@ function Card({ card, index }: CardProps) {
         >
           {card.name}
           <i
-            className="bi bi-pencil-fill"
+            className="bi bi-pencil-fill ps-1"
             onClick={() => setShowEditCradModal(true)}
           />
           <EditCard
