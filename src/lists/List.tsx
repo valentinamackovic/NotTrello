@@ -80,26 +80,24 @@ function List({
                 />
               </div>
             )}
-            <Droppable
-              droppableId={list.id}
-              type="CARD"
-              direction="vertical"
-              ignoreContainerClipping={true}
-              isCombineEnabled={false}
-            >
-              {(provided: DroppableProvided) => (
-                <div>
-                  <div
-                    className="column-content"
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    {cardComponents}
+            <div className="column-content">
+              <Droppable
+                droppableId={list.id}
+                type="CARD"
+                direction="vertical"
+                ignoreContainerClipping={true}
+                isCombineEnabled={false}
+              >
+                {(provided: DroppableProvided) => (
+                  <div>
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {cardComponents}
+                    </div>
+                    {provided.placeholder}
                   </div>
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
+                )}
+              </Droppable>
+            </div>
             <AddItem
               title="Add another card"
               handleAddItemClicked={(name) => handleAddCard(name)}
