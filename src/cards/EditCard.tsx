@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import ConfirmationModal from "../shared/ConfirmationModal";
 import { useOutsideClickAlert } from "../shared/useOutsideClickAlert";
 import { ApplicationState } from "../store";
 import { resetCardState } from "./cardActions";

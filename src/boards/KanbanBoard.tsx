@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import AddItemList from "../lists/AddItemList";
 import List from "../lists/List";
+import { fetchListsSucceeded } from "../lists/listActions";
 import { addList, fetchLists, onDragEnd } from "../lists/listThunks";
 import { ApplicationState } from "../store";
 
@@ -17,6 +18,7 @@ interface KanbanBoardProps {
   fetchLists: (idBoard: string) => void;
   addList: (name: string, idBoard: string) => Promise<void>;
   onDragEnd: (result: DropResult, lists: List[]) => void;
+  fetchListsSucceeded: (lists: List[]) => void;
 }
 
 function KanbanBoard({
@@ -24,12 +26,17 @@ function KanbanBoard({
   lists,
   addList,
   onDragEnd,
+  fetchListsSucceeded,
 }: KanbanBoardProps) {
   const { id } = useParams<RouterParamTypes>();
 
   useEffect(() => {
     fetchLists(id);
-  }, [fetchLists, id]);
+
+    return () => {
+      fetchListsSucceeded([]);
+    };
+  }, [fetchLists, fetchListsSucceeded, id]);
 
   const handleAddListClicked = (name: string) => {
     if (name === "") {
@@ -85,6 +92,9 @@ const mapStateToProps = (state: ApplicationState) => ({
   lists: state.lists.lists,
 });
 
-export default connect(mapStateToProps, { fetchLists, addList, onDragEnd })(
-  KanbanBoard
-);
+export default connect(mapStateToProps, {
+  fetchLists,
+  addList,
+  onDragEnd,
+  fetchListsSucceeded,
+})(KanbanBoard);
