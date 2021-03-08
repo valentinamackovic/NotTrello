@@ -83,7 +83,7 @@ export const onDragEnd = (result: DropResult, lists: List[]) => async (
     return;
   }
   if (result.type === "COLUMN") {
-    const reorderedLists = reorder(source.index, destination.index, lists);
+    let reorderedLists = reorder(source.index, destination.index, lists);
     const [movedBetween1st, movedBetween2nd] = getSurroundingLists(
       reorderedLists,
       draggableId
@@ -97,12 +97,15 @@ export const onDragEnd = (result: DropResult, lists: List[]) => async (
       movedBetween1st.pos === 0
         ? "top"
         : randomInRange(movedBetween2nd.pos, movedBetween1st.pos);
+    dispatch(reorderListsSucceeded(reorderedLists));
     API.put<List>("lists/" + draggableId, null, {
       params: {
         pos: newPos,
       },
-    }).then((response) => dispatch(updateListSucceeded(response.data)));
-    dispatch(reorderListsSucceeded(reorderedLists));
+    })
+      .then((response) => dispatch(updateListSucceeded(response.data)))
+      .catch((e) => dispatch(reorderListsSucceeded(lists)));
+
     return;
   }
 
@@ -137,15 +140,20 @@ export const onDragEnd = (result: DropResult, lists: List[]) => async (
     dispatch(fetchListsSucceeded(updatedCardList));
     API.put<Card>("cards/" + draggableId, updatedCard, {
       headers: { "Content-Type": "application/json" },
-    }).then(({ status, data }) => {
-      if (status === 200) {
-        dispatch(updateCardSucceeded(data));
-        dispatch(fetchListsSucceeded(updatedCardList));
-      }
-    });
+    })
+      .then(({ status, data }) => {
+        if (status === 200) {
+          dispatch(updateCardSucceeded(data));
+          dispatch(fetchListsSucceeded(updatedCardList));
+        }
+      })
+      .catch((e) => dispatch(reorderListsSucceeded(lists)));
+
     return;
   }
 
+  const movedFromListCopy = JSON.parse(JSON.stringify(movedFromList));
+  const movedToListCopy = JSON.parse(JSON.stringify(movedToList));
   movedFromList.cards.splice(source.index, 1);
   movedToList.cards.splice(destination.index, 0, movedCard);
   const updatedCard = updateMovedCard(
@@ -158,20 +166,25 @@ export const onDragEnd = (result: DropResult, lists: List[]) => async (
   dispatch(updateListSucceeded(movedToList));
   API.put<Card>("cards/" + draggableId, updatedCard, {
     headers: { "Content-Type": "application/json" },
-  }).then(({ status, data }) => {
-    if (status === 200) {
-      const reorderedLists = lists.map((l) => {
-        if (l.id === movedToList.id) {
-          return { ...movedToList };
-        } else if (l.id === movedFromList.id) {
-          return { ...movedFromList };
-        }
-        return l;
-      });
-      dispatch(updateCardSucceeded(data));
-      dispatch(fetchListsSucceeded(reorderedLists));
-    }
-  });
+  })
+    .then(({ status, data }) => {
+      if (status === 200) {
+        const reorderedLists = lists.map((l) => {
+          if (l.id === movedToList.id) {
+            return { ...movedToList };
+          } else if (l.id === movedFromList.id) {
+            return { ...movedFromList };
+          }
+          return l;
+        });
+        dispatch(updateCardSucceeded(data));
+        dispatch(fetchListsSucceeded(reorderedLists));
+      }
+    })
+    .catch((e) => {
+      dispatch(updateListSucceeded(movedFromListCopy));
+      dispatch(updateListSucceeded(movedToListCopy));
+    });
 };
 
 function reorder(from: number, to: number, list: any[]) {
