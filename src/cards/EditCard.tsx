@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
+import { onEscapeOrEnter } from "../shared/onEscapeOrEnter";
 import { useOutsideClickAlert } from "../shared/useOutsideClickAlert";
 import { ApplicationState } from "../store";
 import { resetCardState } from "./cardActions";
@@ -55,6 +56,18 @@ function EditCard({
     setDescription(card?.desc || "");
   }, [card]);
 
+  const handleOnKeyUp = (e: any) => {
+    onEscapeOrEnter(
+      e.key,
+      () => {
+        e.target.blur();
+        setIsBtnSaveCommentVisible(false);
+        setComment("");
+      },
+      () => onAddComment()
+    );
+  };
+
   const onSave = () => {
     const updatedCard: Card = {
       name: title,
@@ -74,7 +87,7 @@ function EditCard({
   };
 
   const comments = card?.actions?.map((comment) => (
-    <Comment comment={comment} />
+    <Comment key={comment.id} comment={comment} />
   ));
 
   if (!show) {
@@ -128,6 +141,7 @@ function EditCard({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               onFocus={() => setIsBtnSaveCommentVisible(true)}
+              onKeyUp={(e) => handleOnKeyUp(e)}
             />
             {isBtnSaveCommentVisible && (
               <button

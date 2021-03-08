@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import ConfirmationModal from "../shared/ConfirmationModal";
+import { onEscapeOrEnter } from "../shared/onEscapeOrEnter";
 import { deleteComment, updateComment } from "./cardThunks";
 
 interface CommentProps {
@@ -17,6 +18,14 @@ function Comment({ comment, updateComment, deleteComment }: CommentProps) {
   useEffect(() => {
     setText(comment.data.text);
   }, [comment]);
+
+  const handleOnKeyUp = (e: any) => {
+    onEscapeOrEnter(
+      e.key,
+      () => setIsInEditState(false),
+      () => handleSaveCommentClicked()
+    );
+  };
 
   const handleSaveCommentClicked = () => {
     const action = { ...comment, data: { ...comment.data, text } };
@@ -40,6 +49,8 @@ function Comment({ comment, updateComment, deleteComment }: CommentProps) {
         className="edit-card-title-input mt-1"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyUp={(e) => handleOnKeyUp(e)}
+        disabled={!isInEditState}
       />
       {isInEditState ? (
         <div className="align-self-center">

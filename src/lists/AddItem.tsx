@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { onEscapeOrEnter } from "../shared/onEscapeOrEnter";
 import { useOutsideClickAlert } from "../shared/useOutsideClickAlert";
 
 interface AddItemProps {
@@ -11,6 +12,23 @@ function AddItem({ title, handleAddItemClicked }: AddItemProps) {
   useOutsideClickAlert(addItemFormRef, () => setIsAddingItem(false));
   const [isAddingItem, setIsAddingItem] = useState<boolean>(false);
   const [newItemName, setNewItemName] = useState<string>("");
+
+  const handleOnKeyUp = (e: any) => {
+    onEscapeOrEnter(
+      e.key,
+      () => setIsAddingItem(false),
+      () => addItemAndHideForm()
+    );
+  };
+
+  const addItemAndHideForm = () => {
+    const name = newItemName.replace(/\n/g, "");
+    if (name !== "") {
+      handleAddItemClicked(newItemName);
+      setIsAddingItem(false);
+      setNewItemName("");
+    }
+  };
 
   if (!isAddingItem) {
     return (
@@ -28,16 +46,13 @@ function AddItem({ title, handleAddItemClicked }: AddItemProps) {
         value={newItemName}
         onChange={(e) => setNewItemName(e.target.value)}
         autoFocus
+        onKeyUp={(e) => handleOnKeyUp(e)}
       />
       <div className="mt-1">
         <button
           type="button"
           className="btn btn-info btn-sm text-dark"
-          onClick={() => {
-            handleAddItemClicked(newItemName);
-            setIsAddingItem(false);
-            setNewItemName("");
-          }}
+          onClick={() => addItemAndHideForm()}
         >
           Add item
         </button>
