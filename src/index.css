@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
+  overflow-y: hidden;
 }
 
 code {
@@ -53,7 +54,7 @@ i:hover {
 
 .horizontal-scrollable {
   max-width: 100vw;
-  min-height: calc(100vh - 52px);
+  min-height: calc(100vh - 52px - 31px);
   white-space: nowrap;
   overflow-x: auto;
 }
@@ -188,6 +189,7 @@ i:hover {
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 12px;
 }
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;

@@ -5,4 +5,5 @@ type BoardAction = {
 
 interface RouterParamTypes {
   id: string;
+  name: string;
 }

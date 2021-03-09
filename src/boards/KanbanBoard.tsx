@@ -28,7 +28,7 @@ function KanbanBoard({
   onDragEnd,
   fetchListsSucceeded,
 }: KanbanBoardProps) {
-  const { id } = useParams<RouterParamTypes>();
+  const { id, name: boardName } = useParams<RouterParamTypes>();
 
   useEffect(() => {
     fetchLists(id);
@@ -55,6 +55,7 @@ function KanbanBoard({
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
+      <BoardName name={boardName} />
       <div
         className="p-2 horizontal-scrollable d-flex align-items-start bg-secondary"
         id="fancy-scrollbar"
@@ -85,6 +86,14 @@ function KanbanBoard({
         </Droppable>
       </div>
     </DragDropContext>
+  );
+}
+
+function BoardName({ name }: any) {
+  return (
+    <nav className="bg-dark text-info m-0 fs-5 ps-3 border-top border-secondary">
+      {name}
+    </nav>
   );
 }
 
