@@ -21,7 +21,7 @@ function Comment({ comment, updateComment, deleteComment }: CommentProps) {
 
   const handleOnKeyUp = (e: any) => {
     onEscapeOrEnter(
-      e.key,
+      e,
       () => setIsInEditState(false),
       () => handleSaveCommentClicked()
     );

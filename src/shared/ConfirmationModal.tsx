@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useEscapeClick } from "./useEscapeClick";
 import { useOutsideClickAlert } from "./useOutsideClickAlert";
 
 interface ConfirmationModalprops {
@@ -12,6 +13,8 @@ function ConfirmationModal({ show, close, onConfirm }: ConfirmationModalprops) {
   useOutsideClickAlert(modalContentRef, () => {
     close();
   });
+
+  useEscapeClick(() => close());
 
   if (!show) {
     return null;

@@ -1,11 +1,12 @@
 export function onEscapeOrEnter(
-  key: string,
+  event: KeyboardEvent,
   onEscape: () => void,
   onEnter: () => void
 ) {
-  if (key === "Escape") {
+  event.stopPropagation();
+  if (event.key === "Escape") {
     onEscape();
-  } else if (key === "Enter") {
+  } else if (event.key === "Enter") {
     onEnter();
   }
 }

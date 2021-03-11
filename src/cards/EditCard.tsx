@@ -58,7 +58,7 @@ function EditCard({
 
   const handleOnKeyUp = (e: any) => {
     onEscapeOrEnter(
-      e.key,
+      e,
       () => {
         e.target.blur();
         setIsBtnSaveCommentVisible(false);

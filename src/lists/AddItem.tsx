@@ -15,7 +15,7 @@ function AddItem({ title, handleAddItemClicked }: AddItemProps) {
 
   const handleOnKeyUp = (e: any) => {
     onEscapeOrEnter(
-      e.key,
+      e,
       () => setIsAddingItem(false),
       () => addItemAndHideForm()
     );
