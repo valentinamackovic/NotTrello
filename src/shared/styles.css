@@ -46,3 +46,11 @@
 .w-100 {
   width: 100%;
 }
+
+.text-color {
+  color: var(--text-color);
+}
+
+.dimmed-background {
+  background-color: rgba(0, 0, 0, 0.15);
+}

@@ -55,7 +55,7 @@ function List({
       <Draggable draggableId={list.id} index={index}>
         {(provided: DraggableProvided) => (
           <div
-            className="bg-dark rounded kanban-column align-self-start p-2"
+            className="rounded kanban-column align-self-start p-2"
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}

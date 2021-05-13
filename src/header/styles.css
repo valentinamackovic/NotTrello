@@ -1,9 +1,9 @@
 .header-link {
   text-decoration: none;
-  color: #0dcaf0;
+  color: var(--text-color);
 }
 
 .header-link:hover {
   opacity: 0.5;
-  color: #0dcaf0 !important;
+  color: var(--text-color);
 }

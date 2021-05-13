@@ -1,11 +1,16 @@
 type Board = {
   id: string;
   name: string;
-  prefs: {
-    backgroundImage?: string;
-    backgroundColor?: string;
-  };
+  prefs: BoardPref;
 };
+
+type BoardPref = {
+  backgroundImage?: string;
+  backgroundColor?: string;
+  backgroundBrightness: BackgroundBrigthness;
+};
+
+type BackgroundBrigthness = "light" | "dark";
 
 type List = {
   id: string;

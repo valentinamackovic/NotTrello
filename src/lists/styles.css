@@ -2,6 +2,8 @@
   min-width: 275px;
   max-width: 275px;
   display: inline-block;
+  background-color: #ebecf0;
+  color: #172b4d;
 }
 
 .kanban-column + .kanban-column {

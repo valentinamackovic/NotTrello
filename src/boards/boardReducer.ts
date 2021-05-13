@@ -1,9 +1,11 @@
 interface BoardState {
   boards: Board[];
+  boardPreferences: Map<string, BoardPref>;
 }
 
 const initialSate: BoardState = {
   boards: [],
+  boardPreferences: new Map(),
 };
 
 const listReducer = (state = initialSate, action: BoardAction): BoardState => {
@@ -12,6 +14,7 @@ const listReducer = (state = initialSate, action: BoardAction): BoardState => {
       return {
         ...state,
         boards: action.boards,
+        boardPreferences: action.boardPrefs,
       };
     default:
       return state;

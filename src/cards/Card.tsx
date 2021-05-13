@@ -14,7 +14,7 @@ function Card({ card, index }: CardProps) {
     <Draggable draggableId={card.id} index={index}>
       {(provided: DraggableProvided) => (
         <div
-          className="bg-secondary rounded m-1 px-2 py-1 d-flex justify-content-between text-wrap"
+          className="rounded m-1 px-2 py-1 d-flex justify-content-between text-wrap bg-white"
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

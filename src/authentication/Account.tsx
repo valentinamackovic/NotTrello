@@ -17,7 +17,7 @@ function Account() {
   }
 
   return (
-    <div className="text-light text-end">
+    <div className="text-end text-color">
       <i
         className="bi bi-three-dots-vertical"
         onClick={() => setIsMenuOpen(!isMenuOpen)}

@@ -54,3 +54,15 @@ i:hover {
 #fancy-scrollbar::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px #a0a5ac;
 }
+
+:root {
+  --root-color: #212529;
+  --root-image: url("");
+  --text-color: #172b4d;
+}
+
+.root-container {
+  background-color: var(--root-color);
+  background-image: var(--root-image);
+  background-size: cover;
+}

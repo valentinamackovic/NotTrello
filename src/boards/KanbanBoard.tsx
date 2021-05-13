@@ -12,9 +12,11 @@ import List from "../lists/List";
 import { fetchListsSucceeded } from "../lists/listActions";
 import { addList, fetchLists, onDragEnd } from "../lists/listThunks";
 import { ApplicationState } from "../store";
+import { resetColors, setBackgroundColorFromPreferences } from "./boardStyle";
 
 interface KanbanBoardProps {
   lists: List[];
+  boardPreferences: Map<string, BoardPref>;
   fetchLists: (idBoard: string) => void;
   addList: (name: string, idBoard: string) => Promise<void>;
   onDragEnd: (result: DropResult, lists: List[]) => void;
@@ -24,6 +26,7 @@ interface KanbanBoardProps {
 function KanbanBoard({
   fetchLists,
   lists,
+  boardPreferences,
   addList,
   onDragEnd,
   fetchListsSucceeded,
@@ -33,8 +36,11 @@ function KanbanBoard({
   useEffect(() => {
     fetchLists(id);
 
+    setBackgroundColorFromPreferences(boardPreferences.get(id));
+
     return () => {
       fetchListsSucceeded([]);
+      resetColors();
     };
   }, [fetchLists, fetchListsSucceeded, id]);
 
@@ -57,7 +63,7 @@ function KanbanBoard({
     <DragDropContext onDragEnd={handleDragEnd}>
       <BoardName name={boardName} />
       <div
-        className="p-2 horizontal-scrollable d-flex align-items-start bg-secondary"
+        className="p-2 horizontal-scrollable d-flex align-items-start"
         id="fancy-scrollbar"
       >
         <Droppable
@@ -72,7 +78,7 @@ function KanbanBoard({
               <div
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className="d-flex align-items-start bg-secondary"
+                className="d-flex align-items-start"
               >
                 {listsComponents}
                 <AddItemList
@@ -91,14 +97,13 @@ function KanbanBoard({
 
 function BoardName({ name }: any) {
   return (
-    <nav className="bg-dark text-info m-0 fs-5 ps-3 border-top border-secondary">
-      {name}
-    </nav>
+    <nav className="m-0 fs-5 ps-3 text-color mt-1 text-center">{name}</nav>
   );
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
   lists: state.lists.lists,
+  boardPreferences: state.boards.boardPreferences,
 });
 
 export default connect(mapStateToProps, {

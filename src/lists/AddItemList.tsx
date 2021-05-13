@@ -12,7 +12,7 @@ function AddItemList({ handleAddListClicked, index }: AddItemListProps) {
     <Draggable draggableId={"id"} index={index} isDragDisabled={true}>
       {(provided: DraggableProvided) => (
         <div
-          className="bg-dark rounded kanban-column p-2 align-self-start mx-1"
+          className="rounded kanban-column p-2 align-self-start mx-1"
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}

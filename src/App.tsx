@@ -1,16 +1,16 @@
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LoginPage from "./authentication/LoginPage";
 import Boards from "./boards/Boards";
 import KanbanBoardView from "./boards/KanbanBoard";
 import Header from "./header/Header";
-import LoginPage from "./authentication/LoginPage";
 import ProtectedRoute from "./shared/ProtectedRoute";
 import store from "./store";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="min-vh-100 text-light">
+      <div className="min-vh-100 text-light root-container">
         <Router>
           <Header />
           <Switch>

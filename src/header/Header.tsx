@@ -5,7 +5,7 @@ import Account from "../authentication/Account";
 function Header() {
   const { pathname } = useLocation();
   return (
-    <nav className="navbar navbar-dark bg-dark d-flex justify-content-center text-info fs-4 row m-0">
+    <nav className="navbar d-flex justify-content-center fs-4 row m-0 dimmed-background">
       {pathname !== "/" ? (
         <Link to="/" className="col-4">
           <i className="bi bi-arrow-left-circle header-link" />
