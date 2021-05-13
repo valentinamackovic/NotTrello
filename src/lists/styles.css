@@ -1,0 +1,28 @@
+.kanban-column {
+  min-width: 275px;
+  max-width: 275px;
+  display: inline-block;
+}
+
+.kanban-column + .kanban-column {
+  margin-left: 10px;
+}
+
+.column-content {
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.list-title {
+  min-height: 20px;
+}
+
+.add-item:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.add-item-teaxtarea {
+  resize: none;
+}

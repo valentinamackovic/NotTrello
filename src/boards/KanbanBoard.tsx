@@ -30,8 +30,6 @@ function KanbanBoard({
 }: KanbanBoardProps) {
   const { id, name: boardName } = useParams<RouterParamTypes>();
 
-  console.log(id);
-
   useEffect(() => {
     fetchLists(id);
 

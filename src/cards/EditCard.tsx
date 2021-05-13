@@ -60,7 +60,6 @@ function EditCard({
   useEscapeClick(close);
 
   const handleOnKeyUp = (e: any) => {
-    console.log("input escape");
     e.stopPropagation();
     onEscapeOrEnter(
       e,
