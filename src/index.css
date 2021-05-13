@@ -56,7 +56,7 @@ i:hover {
 }
 
 :root {
-  --root-color: #212529;
+  --root-color: white;
   --root-image: url("");
   --text-color: #172b4d;
 }
