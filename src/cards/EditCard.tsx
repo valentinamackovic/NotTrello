@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { onEscapeOrEnter } from "../shared/onEscapeOrEnter";
+import { useEscapeClick } from "../shared/useEscapeClick";
 import { useOutsideClickAlert } from "../shared/useOutsideClickAlert";
 import { ApplicationState } from "../store";
 import { resetCardState } from "./cardActions";
@@ -56,7 +57,11 @@ function EditCard({
     setDescription(card?.desc || "");
   }, [card]);
 
+  useEscapeClick(close);
+
   const handleOnKeyUp = (e: any) => {
+    console.log("input escape");
+    e.stopPropagation();
     onEscapeOrEnter(
       e,
       () => {
@@ -135,6 +140,7 @@ function EditCard({
             }}
           >
             <input
+              id="comment"
               type="text"
               className="form-control border-bottom-0 comment-input"
               placeholder="Write a comment"

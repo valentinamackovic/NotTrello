@@ -1,9 +1,10 @@
-import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Boards from "./boards/Boards";
 import KanbanBoardView from "./boards/KanbanBoard";
 import Header from "./header/Header";
+import LoginPage from "./authentication/LoginPage";
+import ProtectedRoute from "./shared/ProtectedRoute";
 import store from "./store";
 
 function App() {
@@ -13,12 +14,15 @@ function App() {
         <Router>
           <Header />
           <Switch>
-            <Route exact path="/b/:id/:name">
-              <KanbanBoardView />
+            <Route path="/login">
+              <LoginPage />
             </Route>
-            <Route path="/">
-              <Boards />
-            </Route>
+            <ProtectedRoute
+              exact={true}
+              path="/b/:id/:name"
+              component={KanbanBoardView}
+            />
+            <ProtectedRoute path="/" component={Boards} />
           </Switch>
         </Router>
       </div>

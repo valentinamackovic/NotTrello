@@ -176,6 +176,9 @@ i:hover {
 .clickable {
   cursor: pointer;
 }
+.clickable:hover {
+  cursor: pointer;
+}
 
 .add-board-input:focus {
   background-color: transparent;
@@ -185,6 +188,27 @@ i:hover {
 
 .w-100 {
   width: 100%;
+}
+
+.account-menu-options {
+  position: absolute;
+  display: inline-block;
+  top: 100%;
+  right: 0;
+  background: transparent;
+  z-index: 2000;
+  background-color: white;
+  padding: 10px 0;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 10%;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.account-menu-option {
+  cursor: pointer;
+  padding-left: 10px;
 }
 
 ::-webkit-scrollbar {
