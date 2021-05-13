@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/NotTrello/static/css/main.13029f43.chunk.css",
+    "main.css": "/NotTrello/static/css/main.8dc2bd50.chunk.css",
     "main.js": "/NotTrello/static/js/main.4d15061e.chunk.js",
     "main.js.map": "/NotTrello/static/js/main.4d15061e.chunk.js.map",
     "runtime-main.js": "/NotTrello/static/js/runtime-main.1846cbab.js",
@@ -10,13 +10,13 @@
     "static/js/3.60b47ceb.chunk.js": "/NotTrello/static/js/3.60b47ceb.chunk.js",
     "static/js/3.60b47ceb.chunk.js.map": "/NotTrello/static/js/3.60b47ceb.chunk.js.map",
     "index.html": "/NotTrello/index.html",
-    "static/css/main.13029f43.chunk.css.map": "/NotTrello/static/css/main.13029f43.chunk.css.map",
+    "static/css/main.8dc2bd50.chunk.css.map": "/NotTrello/static/css/main.8dc2bd50.chunk.css.map",
     "static/js/2.43044e01.chunk.js.LICENSE.txt": "/NotTrello/static/js/2.43044e01.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1846cbab.js",
     "static/js/2.43044e01.chunk.js",
-    "static/css/main.13029f43.chunk.css",
+    "static/css/main.8dc2bd50.chunk.css",
     "static/js/main.4d15061e.chunk.js"
   ]
 }
